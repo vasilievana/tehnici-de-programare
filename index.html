@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tehnici de programare</title>
+        <link rel="website icon" type="png" href="images/CR.png">
+        <link rel="stylesheet" href="css/stylesheet.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/chalk.min.css">
+        <link rel="stylesheet" href="link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+        <div class="hero-image" id="hero-image">
+            <div class="hero-text">
+                <h2>Tehnici de programare</h2>
+        </div>
+        <div id="sideNav">
+            <nav>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#introducere">Metoda Trierii</a></li>
+                    <li><a href="#ec-omogene_2">Metoda Greedy</a></li>
+                    <li><a href="#ec-omogene_3">Recursia</a></li>
+                    <li><a href="#ec-omogene_4">Backtracking</a></li>
+                    <li><a href="#footer">Final</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+        <div id="manuBtn">
+            <img src="images/menu.png" alt="" id="menu">
+        </div>
+        <section id="introducere">
+            <div class="title-text">
+                <p>METODA TRIERII</p>
+            </div>
+            <div class="feature-box">
+                <div class="features">
+                    <div class="features-desc">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa"></i>
+                        </div>
+                        <div class="feature-text">
+                            <p>
+                                Se numește metoda trierii metoda ce identifică toate soluțiile unei probleme in dependență de mulțimea soluțiilor posibile. Toate soluțiile se indentifică prin valori, ce aparțin tipurilor de date studiate: integer, boolean, enumerare sau subdomeniu. În probleme mai complicate este nevoie de a reprezenta aceste elemente prin tablouri, articole sau mulțimi.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="features-desc" style="margin-bottom: initial;">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa"></i>
+                        </div>
+                        <div class="feature-text">
+                            <p> 
+                                Fie P o problemă, soluţia căreia se află printre elementele mulţimii S cu un număr finit de elemente. S={s1, s2 , s3 , ... , sn} . Soluţia se determină prin analiza fiecărui element si din mulţimea S. 
+SCHEMA GENERALĂ 
+for i:=1 to k do 
+if SolutiePosibila (si) then PrelucrareaSolutiei (si)
+(SolutiePosibila este o funcţie booleana care returneaza valoarea true dacă elementul si satisface condiţiile problemei şi false în caz contrar, iar PrelucrareaSolutiei este o procedură care efectuează prelucrarea elementului selectat. De obicei, în această procedură soluţia si este afişată la ecran.)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-img">
+                    <img src="images/trierea.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section id="exempleI">
+            <div class="title-text">
+                <p>Probleme rezolvate</p>
+            </div>
+            <div class="row">
+                <div class="column">
+                <h2 class="title_prob">Se consideră numerele naturale din
+                    mulțimea {1, 2, 3, ..., n}. Să se
+                    determine toate elementele acestei
+                    mulțimi, pentru care suma cifrelor este
+                    egală cu un număr dat k.</h2>
+                
+                <pre>
+                    <code class="language-cpp" style="background:#645242; font-size: 15px;">
+                        
+    #include  &ltiostream&gt
+    using namespace std;
+
+    int n, m, i, k;
+
+int ProdusulCifrelor(int num) {
+    int p = 1;
+    while (num != 0) {
+        p = p * (num % 10);
+        num = num / 10;
+    }
+    return p;
+}
+
+bool SolutiePosibila(int num) {
+    if (ProdusulCifrelor(num) == m) return true;
+    else return false;
+}
+
+void PrelucrareaSolutiei(int num, int &k) {
+    cout << num << " ";
+    k++;
+}
+
+int main() {
+    cout << "Introduceti n si m: ";
+    cin >> n >> m;
+    k = 0;
+
+    for (i = 1; i <= n; i++) {
+        if (SolutiePosibila(i)) {
+            PrelucrareaSolutiei(i, k);
+        }
+    }
+
+    if (k == 0) {
+        cout << "Nu exista numere" << endl;
+    }
+
+    return 0;
+}
+                    </code>
+                </pre>
+            </div>
+                <div class="column">
+                <h2 class="title_prob">Se consideră numerele naturale din
+                    mulțimea {1, 2, 3, ..., n}. Să se
+                    determine toate elementele acestei
+                    mulțimi, pentru care produsul cifrelor
+                    este egală cu un număr dat k.</h2>
+                <pre>
+                    <code class="language-cpp" style="background: #645242; font-size: 15px;">
+
+
+        #include &ltiostream&gt
+        #include &ltstring&gt
+        using namespace std;
+        
+        int n, m, i, k;
+
+int SumaCifrelor(int num) {
+    int s = 0;
+    do {
+        s = s + num % 10;
+        num = num / 10;
+    } while (num != 0);
+    return s;
+}
+
+bool SolutiePosibila(int num) {
+    if (SumaCifrelor(num) == m)
+        return true;
+    else
+        return false;
+}
+
+void PrelucrareaSolutiei(int num, int &k) {
+    cout << num << " ";
+    k++;
+}
+
+int main() {
+    cout << "N= ";
+    cin >> n;
+    cout << "M= ";
+    cin >> m;
+    cout << "\nElemente cu proprietatea: \"";
+    cout << "Suma cifrelor numarului este " << m << "!\"\n\t";
+    k = 0;
+
+    for (i = 1; i <= n; ++i) {
+        if (SolutiePosibila(i))
+            PrelucrareaSolutiei(i, k);
+    }
+
+    if (k == 0)
+        cout << "Nu exista!";
+        
+    return 0;
+}
+                             
+                    </code>
+                </pre>
+            </div>
+            <div class="column">
+                <h2 class="title_prob">Să se determine mulțimea care
+                    reprezintă intersecția a două mulțimi
+                    de numere întregi (reale). Elementele
+                    mulțimilor A și B vor fi introduse de la
+                    tastatură.</h2>
+                <pre>
+                    <code class="language-cpp" style="background:#645242; font-size: 15px;">
+
+        #include &ltiostream&gt
+        using namespace std;
+                
+        int main() {
+            int a[100], b[100], c[100], i, j, k = 1, n, m;
+        
+            cin >> n;
+            for (i = 1; i <= n; i++)
+                cin >> a[i];
+        
+            cin >> m;
+            for (j = 1; j <= m; j++)
+                cin >> b[j];
+        
+            for (i = 1; i <= n; i++)
+                for (j = 1; j <= m; j++)
+                    if (a[i] == b[j]) {
+                        c[k] = a[i];
+                        k++;
+                    }
+        
+            for (i = 1; i <= k - 1; i++)
+                cout << c[i] << " ";
+        
+            return 0;
+        }
+                            
+                    </code>
+                </pre>
+            </div>
+        </div>
+        </section>
+        <section id="ec-omogene_2">
+            <div class="title-text">
+                <p>METODA GREEDY</p>
+            </div>
+            <div class="feature-box">
+                <div class="features">
+                    <div class="features-desc">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa"></i>
+                        </div>
+                        <div class="feature-text">
+                            <p>
+                                Algoritmii greedy formează o paradigmă algoritmică care urmează euristica rezolvării de
+probleme care face la nivel local alegerea optimă pentru fiecare etapă în speranța de a găsi un optim
+global. În multe probleme, o strategie greedy produce, în general, o soluție optimă, dar cu toate
+acestea o euristică greedy poate produce la nivel local soluții optime care aproximează o soluție
+optimă globală într-un timp rezonabil.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="features-desc">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa"></i>
+                        </div>
+                        <div class="feature-text">
+                            <p> 
+                                
+Tehnica Greedy se aplică problemelor de optimizare, ea constă în faptul că se construieşte
+soluția optimă pas cu pas. La fiecare pas, fiind selectat în soluție, elementul care pare „cel mai bun/
+cel mai optim” la momentul respectiv, în speranța că această alegere locală va conduce la optimul
+global.
+                            </p>
+                        </div>
+                    </div>                  
+                </div>
+            <div class="features-img">
+                <img src="images/greedy.png" alt="">
+            </div>
+            </div>
+        </section>
+            <section id="exempleI">
+                <div class="title-text">
+                    <p>Probleme rezolvate</p>
+                </div>
+                <div class="row">
+                    <div class="column">
+                    <h2 class="title_prob">Se consideră o mulțime de n numere reale. Se
+                        cere o submulțime a sa cu un număr maxim
+                        de elemente, astfel încât suma elementelor
+                        sale să fie maximă.
+                        </h2>
+                    <pre>
+                        <code class="language-cpp" style="background: #645242; font-size: 15px;">
+
+
+
+
+
+        #include &lt;iostream&gt;
+        using namespace std;
+        float A[100], B[100];
+int n, m = 0, suma = 0;
+
+void Greedy() {
+    for (int i = 1; i <= n; i++)
+        if (A[i] > 0) {
+            m++;
+            B[m] = A[i];
+            suma += B[m];
+        }
+}
+
+int main() {
+    cout << "Introduceti dimensiunea multimii, n: \t";
+    cin >> n;
+    cout << "Introduceti elementele multimii: \n";
+    for (int i = 1; i <= n; i++) {
+        cout << "A[" << i << "]= ";
+        cin >> A[i];
+    }
+    Greedy();
+    cout << "\nElementele multimii cautate sunt: \t";
+    for (int i = 1; i <= m; i++)
+        cout << B[i] << " ";
+    cout << "\nSuma maxima a elementelor este: \t" << suma << endl;
+    return 0;
+}
+         
+        
+                        </code>
+                    </pre>
+                </div>
+                    <div class="column">
+                    <h2 class="title_prob">Se dau o mulțime A cu m numere întregi
+                        nenule și o mulțime B cu n>=m numere
+                        întregi nenule. Se cere să se selecteze un șir
+                        cu m elemente din B,x1,x2,...,xm, astfel încât
+                        expresia următoare să fie maximă:
+                        E=a1*x1+a2*x2+...+an*xn, unde, a1, a2,..., an
+                        sunt elemente ale mulțimii A într-o anumită
+                        ordine pe care trebuie să o determinați.</h2>
+                    <pre>
+                        <code class="language-cpp" style="background: #645242; font-size: 15px;">
+
+
+            #include &lt;iostream&gt;
+            using namespace std;
+            
+            int A[30], B[30], m, n, E;
+
+void Sort(int k, int X[20]){
+    int inversari, man;
+    do{
+        inversari = 0;
+        for(int i = 1; i <= k - 1; i++)
+            if(X[i] > X[i + 1]){
+                man = X[i];
+                X[i] = X[i + 1];
+                X[i + 1] = man;
+                inversari = 1;
+            }
+    } while(inversari);
+}
+
+int main(){
+    cout << dimensiunea m A, m: \t";
+    cin >> m;
+
+    cout <<  elementele m A: \t\t";
+    for(int i = 1; i <= m; i++)
+        cin >> A[i];
+
+    cout << dimensiunea m B, n: \t";
+    cin >> n;
+
+    cout << " elementele m B: \t\t";
+    for(int i = 1; i <= n; i++)
+        cin >> B[i];
+
+    Sort(m, A);
+    Sort(n, B);
+
+    for(int i = 1; i <= m; i++){
+        E += A[i] * B[n - m + i];
+        cout << "\tPasul: " << i << 
+        " valoarea: " << E << endl;
+    }
+
+    cout << "Valoarea maxima  << E;
+
+    return 0;
+}
+                                 
+                        </code>
+                    </pre>
+                </div>
+                <div class="column">
+                    <h2 class="title_prob"> La un cabinet stomatologic se prezintă
+                        simultan n pacienţi. Să se determine ordinea
+                        în care medicul stomatolog va trata pacienţii,
+                        astfel încât să se minimizeze timpul mediu de
+                        aşteptare dacă se cunosc duratele
+                        tratamentelor celor n pacienţi.</h2>
+                    <pre>
+                        <code class="language-cpp" style="background: #645242; font-size: 15px;">
+                            
+        #include &lt;iostream&gt;
+        using namespace std;
+        
+        int main() {
+            int n, a[100], i, j, b[100], t = 0;
+            cout << "Introduceti numarul de pacienti: \t";
+            cin >> n;
+        
+            for (i = 1; i <= n; i++) {
+                cout << i << "\t";
+                cin >> a[i];
+            }
+        
+            for (i = 1; i <= n; i++)
+                b[i] = a[i];
+        
+            for (i = 1; i < n; i++)
+                for (j = i + 1; j <= n; j++)
+                    if (b[i] > b[j])
+                        swap(b[i], b[j]);
+        
+            cout << "\nOrdinea optima:" << endl;
+            for (i = 1; i <= n; i++)
+                for (j = 1; j <= n; j++)
+                    if (b[i] == a[j]) {
+                        cout << j << "\t" << b[i] << endl;
+                    }
+        
+            for (i = 1; i <= n; i++)
+                t = t + b[i] * (n - i);
+        
+            cout << "\nTimp de asteptare optimizat: " << endl;
+            cout << (double)t / n;
+        
+            return 0;
+        }
+                                
+                        </code>
+                    </pre>
+                </div>
+            </div>
+            </section>
+            <section id="ec-omogene_3">
+                <div class="title-text">
+                    <p>RECURSIA</p>
+                </div>
+                <div class="feature-box">
+                    <div class="features">
+                        <div class="features-desc">
+                            <div class="feature-icon">
+                                <i class="fa-solid fa"></i>
+                            </div>
+                            <div class="feature-text">
+                                <p>
+                                    În matematică și informatică, recursivitatea sau recursia este un mod de a defini unele funcții.
+Funcția este recursivă, dacă definiția ei folosește o referire la ea însăși, creând la prima vedere un
+cerc vicios, care însă este numai aparent, nu și real. Nu toate funcțiile matematice pot fi definite
+recursiv, cu alte cuvinte există și funcții nerecursive.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="features-desc">
+                            <div class="feature-icon">
+                                <i class="fa-solid fa"></i>
+                            </div>
+                            <div class="feature-text">
+                                <p> 
+                                    În matematică și informatică recursivitatea funcționează prin definirea unuia sau a mai multor
+cazuri de bază, foarte simple, apoi prin definirea unor reguli prin care cazurile mai complexe se reduc
+la cazuri mai simple
+                                </p>
+                            </div>
+                        </div>                  
+                    </div>
+                <div class="features-img">
+                    <img src="images/Rrecursia.webp" alt="">
+                </div>
+                </div>
+            </section>
+                <section id="exempleI">
+                    <div class="title-text">
+                        <p>Probleme rezolvate</p>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                        <h2 class="title_prob">Să se calculeze recursiv suma elementelor unui sir.</h2>
+                        <pre>
+                            <code class="language-cpp" style="background: #645242; font-size: 15px;">
+        #include &lt;iostream&gt;
+        using namespace std;
+
+int sumaSir(int arr[], int n) {
+    if (n <= 0) {
+        return 0;
+    } else {
+        return arr[n - 1] + sumaSir(arr, n - 1);
+    }
+}
+
+int main() {
+    int n;
+    cout << "Introduceti lungimea sirului: ";
+    cin >> n;
+
+    int arr[n];
+    cout << "Introduceti elementele sirului: ";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    int sum = sumaSir(arr, n);
+    cout << "Suma elementelor sirului este: " << sum << endl;
+
+    return 0;
+}
+                            </code>
+                        </pre>
+                    </div>
+                        <div class="column">
+                        <h2 class="title_prob">Să se elaboreze un program care calculează suma primilor n termini ai șirului de numere. Să
+                            se alcătuiască varianta recursivă şi iterativă ȋn care va afișa suma respectivă.
+                            </h2>
+                        <pre>
+                            <code class="language-cpp" style="background: #645242; font-size: 15px;">
+    
+            #include &lt;iostream&gt;
+            #include <iostream>
+                using namespace std;
+                
+                int suma(int k) {
+                    if (k == 1) 
+                        return 1;
+                    else 
+                        return suma(k - 1) + (4 * k - 3);
+                }
+                
+                int main() {
+                    int n;
+                    cout << "VARIANTA RECURSIVA\n\n";
+                    cout << "Introdu n= ";
+                    cin >> n;
+                    cout << "Suma sirului este: " << suma(n);
+                
+                    return 0;
+                }
+                
+                                     
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="column">
+                        <h2 class="title_prob">Să se elaboreze un program care calculează
+                             produsul primilor n termini ai șirului de numere.
+                            Să se alcătuiască varianta recursivă şi iterativă ȋn
+                             care va afișa produsul respectiv.
+                            </h2>
+                        <pre>
+                            <code class="language-cpp" style="background: #645242; font-size: 15px;">               
+        #include &lt;iostream&gt;
+        #include <iostream>
+            using namespace std;
+            
+            int produs(int k) { 
+                  if (k == 0) 
+            return 1;
+        else 
+        return produs(k - 1) * (5 * k - 4);
+          }
+            
+    int main() {
+          int n;
+             cout << "VARIANTA RECURSIVA";
+            cout << "Introduceti n= ";
+            cin >> n;
+                cout << "Produsul " 
+                << produs(n);
+            
+                return 0;
+            }
+                                    
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                </section>
+                <section id="ec-omogene_4">
+                    <div class="title-text">
+                        <p>BACKTRACKING</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="features">
+                            <div class="features-desc">
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <p>
+                                        Backtracking este un algoritm general pentru a găsi toate (sau unele) soluții la unele probleme de
+calcul, în special probleme de satisfacție de constrângere, care crește gradual candidații la soluții și
+abandonează un candidat („backtracks”) imediat ce stabilește că acest candidat nu poate fi completat
+cu o soluție valabilă. 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="features-desc">
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa"></i>
+                                </div>
+                                <div class="feature-text">
+                                    <p> 
+                                        Metoda backtracking mai poate fi întâlnită în unele resurse ca metoda reluării.
+ Există trei tipuri de probleme în baza metodei backtracking:
+1. Problema deciziei - în această situație, căutăm o soluție fezabilă.
+2. Problema de optimizare - în această situație, căutăm cea mai bună soluție.
+3. Problema de enumerare - în această situație, găsim toate soluțiile fezabile.
+
+
+                                    </p>
+                                </div>
+                            </div>                  
+                        </div>
+                    <div class="features-img">
+                        <img src="images/bback.png" alt="">
+                    </div>
+                    </div>
+                </section>
+                    <section id="exempleI">
+                        <div class="title-text">
+                            <p>Probleme rezolvate</p>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                            <h2 class="title_prob">Fie n>0, natural. Să se scrie un program
+                                care să afișeze toate partițiile unui număr
+                                natural n. Numim partiție a unui număr
+                                natural nenul n o mulțime de numere
+                                naturale nenule {p1, p2, ..., pk} care
+                                îndeplinesc condiția p1+p2+ ...+pk = n.</h2>
+                            <pre>
+                                <code class="language-cpp" style="background: #645242; font-size: 15px;">
+
+
+
+
+
+            #include &lt;iostream&gt;
+            using namespace std;
+
+int n, ns, sol[20];
+
+void afis(int l) {
+    ns++;
+    cout << "Solutia " << ns << " : \t";
+    for(int i = 1; i <= l; i++) {
+        cout << sol[i] << " ";
+    }
+    cout << endl;
+}
+
+void back(int i, int sp) {
+    int j;
+    if (sp == n) {
+        afis(i - 1);
+    } else {
+        for(j = 1; j <= n - sp; j++) {
+            if (j >= sol[i - 1]) {
+                sol[i] = j;
+                back(i + 1, sp + j);
+            }
+        }
+    }
+}
+
+int main() {
+    cout << "Introdu un numar natural: ";
+    cin >> n;
+    ns = 0;
+    back(1, 0);
+    cout << endl;
+    cout << "TOTAL " << ns << " SOLUTII";
+    return 0;
+}
+                                </code>
+                            </pre>
+                        </div>
+                            <div class="column">
+                            <h2 class="title_prob">Se citește de la tastatură un număr natural k
+                                par, k<50. Să se genereze și să se afișeze
+                                toate combinațiile de k paranteze rotunde
+                                care se închid corect. </h2>
+                            <pre>
+                                <code class="language-cpp" style="background: #645242; font-size: 15px;">
+        
+
+
+
+                                    
+        #include &lt;iostream&gt;
+        using namespace std;
+
+int x[10], n, ns;
+
+void scriesol() {
+    ns++;
+    cout << "Solutia " << ns << " : \t";
+    for(int j = 1; j <= n; j++) {
+        if(x[j] == 1) 
+            cout << ")";
+        else 
+            cout << "(";
+    }
+    cout << endl;
+}
+
+int cond(int k) {
+    int i, pi = 0, pd = 0;
+    for(i = 1; i <= k; i++) {
+        if(x[i] == 0) 
+            pd++;
+        else 
+            pi++;
+    }
+    return (pd <= n/2 && pi <= pd);
+}
+
+void back(int k) {
+    int i;
+    for(i = 0; i <= 1; i++) {
+        x[k] = i;
+        if (cond(k)) {
+            if (k == n) 
+                scriesol();
+            else 
+                back(k + 1);
+        }
+    }
+}
+
+int main() {
+    cout << "Introduceti un numar natural: ";
+    cin >> n;
+    back(1);
+    cout << endl;
+    cout << "TOTAL " << ns << " SOLUTII";
+    return 0;
+}
+                                        
+                                         
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="column">
+                            <h2 class="title_prob">Se citește un număr natural k. Să se afișeze
+                                toate modalitățile de a-l descompune ca sumă
+                                de numere naturale consecutive. Dacă acest
+                                lucru nu este posibil, se va afișa mesajul
+                                “Imposibil”.
+                                </h2>
+                            <pre>
+                                <code class="language-cpp" style="background: #645242; font-size: 15px;">       
+         #include &lt;iostream&gt;
+         using namespace std;
+
+         int n, ns, sol[20];
+         
+         void afis(int l) {
+             int i;
+             ns++;
+             for(i = 1; i <= l; i++) {
+                 cout << sol[i] << " ";
+             }
+             cout << endl;
+         }
+         
+         void back(int i, int sp) {
+             int j;
+             if (sp == n && i > 2) {
+                 afis(i - 1);
+             } else {
+                 for(j = sol[i - 1] + 1; j <= n - sp; j++) {
+                     if (j == sol[i - 1] + 1 || i == 1) {
+                         sol[i] = j;
+                         back(i + 1, sp + j);
+                     }
+                 }
+             }
+         }
+         
+         int main() {
+             cout << "Introduceti un numar natural: ";
+             cin >> n;
+             ns = 0;
+             back(1, 0);
+             if (ns == 0) 
+                 cout << "Imposibil"; 
+             cout << endl;
+             cout << "TOTAL " << ns << " SOLUTII";
+             return 0;
+         }
+                                        
+                                        
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    </section>
+        <section id="footer">
+            <div class="title-text">
+                <p>Acest site a fost creeat în scopuri educative de cărte Vasiliev Ana</p>
+            </div>
+            <div class="footer-row">
+                <div class="footer-left">
+                    
+                    
+                </div>
+                <div class="footer-center">
+                    
+                </div>
+                <div class="footer-right">
+                   
+                </div>
+            </div>
+            <div class="social-links">
+                <p> &copy; 2023 - V.A.</p>
+            </div>
+        </section>
+        <script src="js/script.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("scroll", function() {
+              var header = document.querySelector("header");
+              header.classList.toggle("sticky", window.scrollY > 0);
+            });     
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+    </body>
+</html>
